@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Login | SentinelRAG</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+
+        .auth-page {
+            min-height: calc(100vh - 82px);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 60px 20px;
+
+            position: relative;
+        }
+
+        .auth-glow {
+            position: absolute;
+
+            width: 500px;
+            height: 500px;
+
+            background: rgba(0, 229, 255, 0.06);
+
+            filter: blur(100px);
+
+            border-radius: 50%;
+
+            pointer-events: none;
+        }
+
+        .auth-container {
+            width: 100%;
+
+            max-width: 450px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+        .auth-card {
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.055),
+                    rgba(255,255,255,0.015)
+                );
+
+            border: 1px solid rgba(255,255,255,0.09);
+
+            border-radius: 14px;
+
+            padding: 42px;
+
+            box-shadow:
+                0 30px 80px rgba(0,0,0,0.4),
+                inset 0 1px 0 rgba(255,255,255,0.03);
+
+            backdrop-filter: blur(20px);
+        }
+
+        .auth-logo {
+            width: 52px;
+            height: 52px;
+
+            margin: 0 auto 25px;
+
+            display: grid;
+
+            place-items: center;
+
+            border: 1px solid rgba(0,229,255,0.4);
+
+            color: var(--cyan);
+
+            font-size: 25px;
+
+            box-shadow:
+                0 0 30px rgba(0,229,255,0.12);
+        }
+
+        .auth-heading {
+            text-align: center;
+        }
+
+        .auth-heading .eyebrow {
+            margin-bottom: 12px;
+        }
+
+        .auth-heading h1 {
+            font-size: 30px;
+
+            margin-bottom: 10px;
+        }
+
+        .auth-heading p {
+            color: var(--muted);
+
+            font-size: 13px;
+
+            line-height: 1.6;
+
+            margin-bottom: 30px;
+        }
+
+        .auth-form {
+            display: grid;
+
+            gap: 18px;
+        }
+
+        .form-group {
+            display: grid;
+
+            gap: 8px;
+        }
+
+        .form-group label {
+            color: #cbd5dc;
+
+            font-size: 11px;
+
+            font-family: "JetBrains Mono", monospace;
+
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input {
+            width: 100%;
+
+            padding: 14px 15px;
+
+            border-radius: 7px;
+
+            border: 1px solid rgba(255,255,255,0.09);
+
+            background: rgba(0,0,0,0.25);
+
+            color: white;
+
+            outline: none;
+
+            font-size: 13px;
+
+            transition: 0.25s;
+        }
+
+        .form-group input::placeholder {
+            color: #4d5a65;
+        }
+
+        .form-group input:focus {
+            border-color: rgba(0,229,255,0.55);
+
+            box-shadow:
+                0 0 0 3px rgba(0,229,255,0.06);
+        }
+
+        .auth-submit {
+            width: 100%;
+
+            border: none;
+
+            cursor: pointer;
+
+            justify-content: center;
+
+            margin-top: 5px;
+        }
+
+        .auth-footer {
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: var(--muted);
+
+            font-size: 12px;
+        }
+
+        .auth-footer a {
+            color: var(--cyan);
+
+            text-decoration: none;
+
+            font-weight: 600;
+        }
+
+        .security-note {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 7px;
+
+            margin-top: 22px;
+
+            color: #52616d;
+
+            font-size: 9px;
+
+            font-family: "JetBrains Mono", monospace;
+        }
+
+        .security-note span {
+            color: var(--green);
+        }
+
+        @media (max-width: 500px) {
+
+            .auth-card {
+                padding: 30px 22px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <a href="{{ url_for('index') }}"
+           style="text-decoration:none; color:inherit;">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    ◈
+                </div>
+
+                <div>
+
+                    <div class="brand-name">
+                        SENTINEL<span>RAG</span>
+                    </div>
+
+                    <div class="brand-subtitle">
+                        CYBER THREAT INTELLIGENCE
+                    </div>
+
+                </div>
+
+            </div>
+
+        </a>
+
+
+        <div class="nav-actions">
+
+            <span style="
+                color:#81909f;
+                font-size:12px;
+            ">
+                New to SentinelRAG?
+            </span>
+
+            <a href="{{ url_for('signup') }}"
+               class="signup-btn">
+
+                Create Account
+
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- LOGIN -->
+
+    <main class="auth-page">
+
+        <div class="auth-glow"></div>
+
+
+        <div class="auth-container">
+
+            <div class="auth-card">
+
+
+                <div class="auth-logo">
+                    ◈
+                </div>
+
+
+                <div class="auth-heading">
+
+                    <div class="eyebrow">
+                        SECURE ACCESS
+                    </div>
+
+                    <h1>
+                        Welcome back.
+                    </h1>
+
+                    <p>
+                        Sign in to access your autonomous
+                        cyber threat intelligence command center.
+                    </p>
+
+                </div>
+
+
+                <form class="auth-form"
+                      method="POST"
+                      action="{{ url_for('login') }}">
+
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            EMAIL ADDRESS
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="analyst@example.com"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            PASSWORD
+                        </label>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            required
+                        >
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="primary-btn auth-submit">
+
+                        Access Command Center
+
+                        <span>→</span>
+
+                    </button>
+
+
+                </form>
+
+
+                <div class="auth-footer">
+
+                    Don't have an account?
+
+                    <a href="{{ url_for('signup') }}">
+                        Create one
+                    </a>
+
+                </div>
+
+
+                <div class="security-note">
+
+                    <span>●</span>
+
+                    Protected by SentinelRAG Security Layer
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

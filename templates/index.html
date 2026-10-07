@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SentinelRAG | Cyber Threat Intelligence</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <div class="brand">
+            <div class="brand-icon">◈</div>
+
+            <div>
+                <div class="brand-name">SENTINEL<span>RAG</span></div>
+                <div class="brand-subtitle">CYBER THREAT INTELLIGENCE</div>
+            </div>
+        </div>
+
+        <div class="nav-links">
+            <a href="#features">Platform</a>
+            <a href="#agents">AI Agents</a>
+            <a href="#security">Security</a>
+            <a href="#about">About</a>
+        </div>
+
+        <div class="nav-actions">
+            <a href="{{ url_for('login') }}" class="login-btn">
+                Login
+            </a>
+
+            <a href="{{ url_for('signup') }}" class="signup-btn">
+                Get Started
+            </a>
+        </div>
+
+    </nav>
+
+
+    <!-- HERO -->
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="status-badge">
+                    <span class="status-dot"></span>
+                    AUTONOMOUS THREAT INTELLIGENCE
+                </div>
+
+                <h1>
+                    Detect threats.
+                    <br>
+                    <span>Understand attacks.</span>
+                    <br>
+                    Respond faster.
+                </h1>
+
+                <p class="hero-description">
+                    SentinelRAG is an AI-powered cyber threat intelligence
+                    platform that combines Retrieval-Augmented Generation
+                    with autonomous AI agents to investigate suspicious
+                    indicators and generate actionable threat intelligence.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="{{ url_for('signup') }}" class="primary-btn">
+                        Start Investigation
+                        <span>→</span>
+                    </a>
+
+                    <a href="#features" class="secondary-btn">
+                        Explore Platform
+                    </a>
+
+                </div>
+
+                <div class="hero-meta">
+
+                    <div>
+                        <strong>5</strong>
+                        <span>AI AGENTS</span>
+                    </div>
+
+                    <div>
+                        <strong>RAG</strong>
+                        <span>INTELLIGENCE</span>
+                    </div>
+
+                    <div>
+                        <strong>MITRE</strong>
+                        <span>ATT&CK MAPPING</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- HERO VISUAL -->
+
+            <div class="hero-visual">
+
+                <div class="scan-line"></div>
+
+                <div class="radar">
+
+                    <div class="radar-ring ring-one"></div>
+                    <div class="radar-ring ring-two"></div>
+                    <div class="radar-ring ring-three"></div>
+
+                    <div class="radar-cross horizontal"></div>
+                    <div class="radar-cross vertical"></div>
+
+                    <div class="radar-sweep"></div>
+
+                    <div class="radar-point point-one"></div>
+                    <div class="radar-point point-two"></div>
+                    <div class="radar-point point-three"></div>
+
+                    <div class="radar-core">
+                        <span>AI</span>
+                    </div>
+
+                </div>
+
+                <div class="threat-card card-one">
+                    <span class="mini-dot red"></span>
+                    HIGH RISK IOC
+                    <strong>87 / 100</strong>
+                </div>
+
+                <div class="threat-card card-two">
+                    <span class="mini-dot green"></span>
+                    RAG ENGINE
+                    <strong>ONLINE</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- TRUST BAR -->
+
+        <section class="trust-bar">
+
+            <span>BUILT FOR MODERN SECURITY OPERATIONS</span>
+
+            <div class="trust-items">
+                <span>AI AGENTIC ANALYSIS</span>
+                <span>RAG INTELLIGENCE</span>
+                <span>MITRE ATT&CK</span>
+                <span>IOC INVESTIGATION</span>
+            </div>
+
+        </section>
+
+
+        <!-- FEATURES -->
+
+        <section class="section" id="features">
+
+            <div class="section-heading">
+
+                <div class="eyebrow">
+                    PLATFORM CAPABILITIES
+                </div>
+
+                <h2>
+                    Intelligence that works
+                    <span>for you.</span>
+                </h2>
+
+                <p>
+                    From suspicious indicators to actionable intelligence,
+                    SentinelRAG automates the investigation workflow.
+                </p>
+
+            </div>
+
+
+            <div class="feature-grid">
+
+                <div class="feature-card">
+
+                    <div class="feature-number">01</div>
+
+                    <div class="feature-icon">⌁</div>
+
+                    <h3>IOC Investigation</h3>
+
+                    <p>
+                        Investigate suspicious IP addresses, domains,
+                        URLs and file hashes through a unified interface.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-number">02</div>
+
+                    <div class="feature-icon">◉</div>
+
+                    <h3>RAG Intelligence</h3>
+
+                    <p>
+                        Retrieve relevant cybersecurity knowledge and
+                        evidence before generating an AI analysis.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-number">03</div>
+
+                    <div class="feature-icon">✦</div>
+
+                    <h3>Agentic Analysis</h3>
+
+                    <p>
+                        Five specialized AI agents collaborate to collect,
+                        retrieve, reason, verify and report findings.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-number">04</div>
+
+                    <div class="feature-icon">⌖</div>
+
+                    <h3>MITRE Mapping</h3>
+
+                    <p>
+                        Map observed threats to relevant MITRE ATT&CK
+                        tactics and techniques.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- AGENTS -->
+
+        <section class="agents-section" id="agents">
+
+            <div class="agent-intro">
+
+                <div class="eyebrow">
+                    AUTONOMOUS WORKFLOW
+                </div>
+
+                <h2>
+                    Five agents.
+                    <br>
+                    <span>One investigation.</span>
+                </h2>
+
+                <p>
+                    SentinelRAG divides threat intelligence analysis
+                    into specialized autonomous tasks.
+                </p>
+
+            </div>
+
+
+            <div class="agent-pipeline">
+
+                <div class="agent-node active">
+                    <span>01</span>
+                    <strong>COLLECTOR</strong>
+                    <small>Collect & Normalize</small>
+                </div>
+
+                <div class="pipeline-arrow">→</div>
+
+                <div class="agent-node">
+                    <span>02</span>
+                    <strong>RETRIEVER</strong>
+                    <small>Find Evidence</small>
+                </div>
+
+                <div class="pipeline-arrow">→</div>
+
+                <div class="agent-node">
+                    <span>03</span>
+                    <strong>REASONER</strong>
+                    <small>Analyze Threat</small>
+                </div>
+
+                <div class="pipeline-arrow">→</div>
+
+                <div class="agent-node">
+                    <span>04</span>
+                    <strong>VERIFIER</strong>
+                    <small>Validate Findings</small>
+                </div>
+
+                <div class="pipeline-arrow">→</div>
+
+                <div class="agent-node">
+                    <span>05</span>
+                    <strong>REPORTER</strong>
+                    <small>Generate Report</small>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SECURITY -->
+
+        <section class="section security-section" id="security">
+
+            <div class="security-content">
+
+                <div class="eyebrow">
+                    SECURITY OPERATIONS
+                </div>
+
+                <h2>
+                    From raw indicators
+                    <br>
+                    to <span>verified intelligence.</span>
+                </h2>
+
+                <p>
+                    Every investigation follows a structured workflow
+                    designed to provide evidence-backed analysis rather
+                    than unsupported AI responses.
+                </p>
+
+                <div class="security-list">
+
+                    <div>
+                        <span>✓</span>
+                        Evidence-based retrieval
+                    </div>
+
+                    <div>
+                        <span>✓</span>
+                        Confidence scoring
+                    </div>
+
+                    <div>
+                        <span>✓</span>
+                        Threat risk assessment
+                    </div>
+
+                    <div>
+                        <span>✓</span>
+                        MITRE ATT&CK correlation
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="security-terminal">
+
+                <div class="terminal-header">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                    <label>sentinel-analysis.log</label>
+                </div>
+
+                <div class="terminal-body">
+
+                    <p>
+                        <i>[SYSTEM]</i>
+                        SentinelRAG initialized...
+                    </p>
+
+                    <p>
+                        <i>[IOC]</i>
+                        Indicator received
+                    </p>
+
+                    <p>
+                        <i>[RAG]</i>
+                        Searching knowledge base...
+                    </p>
+
+                    <p>
+                        <i>[AGENT]</i>
+                        Reasoner analysis completed
+                    </p>
+
+                    <p>
+                        <i>[VERIFY]</i>
+                        Evidence confidence: 87%
+                    </p>
+
+                    <p class="terminal-success">
+                        <i>[RESULT]</i>
+                        Threat classification: HIGH
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CTA -->
+
+        <section class="cta-section" id="about">
+
+            <div class="cta-glow"></div>
+
+            <div class="eyebrow">
+                READY TO INVESTIGATE?
+            </div>
+
+            <h2>
+                Turn suspicious data
+                <br>
+                into <span>actionable intelligence.</span>
+            </h2>
+
+            <p>
+                Start your autonomous threat investigation with SentinelRAG.
+            </p>
+
+            <a href="{{ url_for('signup') }}" class="primary-btn">
+                Launch SentinelRAG
+                <span>→</span>
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="footer-brand">
+            <div class="brand-name">
+                SENTINEL<span>RAG</span>
+            </div>
+
+            <p>
+                Autonomous Cyber Threat Intelligence Analysis
+            </p>
+        </div>
+
+        <div class="footer-right">
+            <span>© 2026 SentinelRAG</span>
+            <span>AI • RAG • CTI</span>
+        </div>
+
+    </footer>
+
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+</body>
+</html>
