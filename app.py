@@ -7,6 +7,8 @@ from flask_login import (
 )
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
+from agents.collector import collect_ioc
+from rag.retriever import retrieve_ioc
 
 app = Flask(__name__)
 
@@ -93,6 +95,7 @@ def signup():
 @app.route("/login", methods=["GET", "POST"])
 def login():
 
+
     if current_user.is_authenticated:
         return redirect(url_for("dashboard"))
 
@@ -116,6 +119,63 @@ def login():
 @login_required
 def dashboard():
     return render_template("dashboard.html")
+@app.route("/api/analyze", methods=["POST"])
+@login_required
+def analyze_ioc():
+    data = request.get_json() or {}
+
+    ioc_type = data.get("type", "IP")
+    value = data.get("value", "").strip()
+
+    if not value:
+        return {"error": "IOC value is required."}, 400
+
+    collected = collect_ioc(ioc_type, value)
+
+    intelligence = retrieve_ioc(collected["indicator"])
+
+    if intelligence:
+
+        severity = intelligence.get("severity", "MEDIUM")
+        confidence = intelligence.get("confidence", 50)
+        mitre = intelligence.get("mitre", [])
+
+        if severity == "HIGH":
+            risk_score = 90
+            classification = "HIGH RISK"
+
+        elif severity == "MEDIUM":
+            risk_score = 60
+            classification = "MEDIUM RISK"
+
+        else:
+            risk_score = 30
+            classification = "LOW RISK"
+
+        return {
+            "indicator": value,
+            "type": ioc_type,
+            "classification": classification,
+            "risk_score": risk_score,
+            "confidence": confidence,
+            "evidence": 1,
+            "description": intelligence.get("description", ""),
+            "mitre": mitre
+        }
+
+    return {
+        "indicator": value,
+        "type": ioc_type,
+        "classification": "UNKNOWN",
+        "risk_score": 0,
+        "confidence": 0,
+        "evidence": 0,
+        "description": "No matching intelligence found.",
+        "mitre": []
+    }
+
+
+  
 
 
 @app.route("/logout")

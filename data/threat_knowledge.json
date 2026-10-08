@@ -1,0 +1,26 @@
+[
+    {
+        "indicator": "192.0.2.1",
+        "type": "IP",
+        "severity": "HIGH",
+        "description": "Example suspicious infrastructure used for SentinelRAG testing.",
+        "mitre": ["T1071", "T1059"],
+        "confidence": 92
+    },
+    {
+        "indicator": "198.51.100.1",
+        "type": "IP",
+        "severity": "MEDIUM",
+        "description": "Suspicious network indicator requiring further investigation.",
+        "mitre": ["T1071"],
+        "confidence": 78
+    },
+    {
+        "indicator": "203.0.113.50",
+        "type": "IP",
+        "severity": "LOW",
+        "description": "Low-confidence indicator used for SentinelRAG testing.",
+        "mitre": [],
+        "confidence": 55
+    }
+]

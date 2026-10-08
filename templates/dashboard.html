@@ -1782,45 +1782,70 @@
        IOC INVESTIGATION DEMO
        ========================================================= */
 
-    function investigateIOC() {
+  async function investigateIOC() {
 
-        const type =
-            document.getElementById("iocType").value;
+    const type = document.getElementById("iocType").value;
+    const value = document.getElementById("iocValue").value.trim();
 
-        const value =
-            document.getElementById("iocValue").value.trim();
+    const result = document.getElementById("scanResult");
+    const resultIOC = document.getElementById("resultIOC");
 
-        const result =
-            document.getElementById("scanResult");
+    if (!value) {
+        alert("Please enter an IOC to investigate.");
+        return;
+    }
 
-        const resultIOC =
-            document.getElementById("resultIOC");
+    resultIOC.textContent = type + " · " + value;
 
+    try {
 
-        if (!value) {
+        const response = await fetch("/api/analyze", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                type: type,
+                value: value
+            })
+        });
 
-            alert("Please enter an IOC to investigate.");
+        const data = await response.json();
 
+        if (!response.ok) {
+            alert(data.error || "Analysis failed.");
             return;
-
         }
 
+        document.querySelector(
+            "#scanResult .result-row:nth-child(2) strong"
+        ).textContent = data.classification;
 
-        resultIOC.textContent =
-            type + " · " + value;
+        document.querySelector(
+            "#scanResult .result-row:nth-child(3) strong"
+        ).textContent = data.evidence + " sources retrieved";
+
+        document.querySelector(
+            "#scanResult .result-row:nth-child(4) strong"
+        ).textContent = data.confidence + "%";
+
+        document.querySelector(
+            ".risk-number strong"
+        ).textContent = data.risk_score;
+
+        document.querySelector(
+            ".risk-details h3"
+        ).textContent = data.classification;
 
         result.classList.add("show");
 
+    } catch (error) {
 
-        /*
-         * This currently demonstrates the investigation
-         * interface.
-         *
-         * Later we will connect this button to the
-         * Python RAG + Agent backend.
-         */
+        console.error(error);
+        alert("Unable to connect to SentinelRAG analysis engine.");
 
     }
+}
 
 
     /* =========================================================
