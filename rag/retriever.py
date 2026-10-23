@@ -1,30 +1,86 @@
-import json
 import os
+import requests
 
 
-BASE_DIR = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), "..")
-)
-
-KNOWLEDGE_FILE = os.path.join(
-    BASE_DIR,
-    "data",
-    "threat_knowledge.json"
-)
-
-
-def load_knowledge():
-    with open(KNOWLEDGE_FILE, "r", encoding="utf-8") as file:
-        return json.load(file)
+ABUSEIPDB_URL = "https://api.abuseipdb.com/api/v2/check"
 
 
 def retrieve_ioc(indicator):
-    indicator = indicator.strip()
 
-    knowledge = load_knowledge()
+    api_key = os.environ.get("ABUSEIPDB_API_KEY")
 
-    for item in knowledge:
-        if item["indicator"].lower() == indicator.lower():
-            return item
+    if not api_key:
+        raise RuntimeError(
+            "ABUSEIPDB_API_KEY is not configured."
+        )
 
-    return None
+    headers = {
+        "Accept": "application/json",
+        "Key": api_key
+    }
+
+    params = {
+        "ipAddress": indicator,
+        "maxAgeInDays": 90
+    }
+
+    response = requests.get(
+        ABUSEIPDB_URL,
+        headers=headers,
+        params=params,
+        timeout=15
+    )
+
+    if response.status_code != 200:
+        raise RuntimeError(
+            f"AbuseIPDB API error: {response.status_code}"
+        )
+
+    result = response.json()
+    data = result.get("data", {})
+
+    abuse_score = int(
+        data.get("abuseConfidenceScore", 0)
+    )
+
+    total_reports = int(
+        data.get("totalReports", 0)
+    )
+
+    country = data.get(
+        "countryCode",
+        "Unknown"
+    )
+
+    isp = data.get(
+        "isp",
+        "Unknown"
+    )
+
+    usage_type = data.get(
+        "usageType",
+        "Unknown"
+    )
+
+    if abuse_score >= 75:
+        severity = "HIGH"
+    elif abuse_score >= 30:
+        severity = "MEDIUM"
+    else:
+        severity = "LOW"
+
+    return {
+        "indicator": indicator,
+        "severity": severity,
+        "confidence": abuse_score,
+        "description": (
+            f"AbuseIPDB reported {total_reports} "
+            f"reports for this IP."
+        ),
+        "mitre": [],
+        "total_reports": total_reports,
+        "country": country,
+        "isp": isp,
+        "usage_type": usage_type,
+        "source": "AbuseIPDB"
+    }
